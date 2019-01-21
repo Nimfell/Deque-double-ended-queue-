@@ -33,6 +33,12 @@ class Deque
           size = 0;
      }
 
+     int Size()
+     {
+          int S = size;
+          return S;
+     }
+     
      void AddFront(T item)
      {
           Node *node = new Node(item);
@@ -94,11 +100,7 @@ class Deque
           return NULL;
 
      }
-        
-     int Size()
-     {
-          return size;
-     }
+
 }; 
 
 //---------------------------------------------------------------------------
@@ -109,6 +111,19 @@ class Deque
 //The following code snippet is in another head-file.
 //Given here for readability:
 //===========================================================================
+
+
+bool IsPalindrome (Deque<int>* deque)
+{
+     int Size = deque->size;
+     while (Size <= 1)
+     {
+          if ( deque->RemoveFront() != deque->RemoveTail() )
+               return false;
+     }
+     return true;
+}
+
 
 //--------------------*** TEST  ***----------------------
 
@@ -186,7 +201,22 @@ int TestDeque ()
      if (deque->RemoveFront() != 2) result++;
      if (deque->RemoveFront() != 1) result++;
 
+     //--- Is it a palindrome? ---
+     deque->AddTail(1);
+     deque->AddTail(2);
+     deque->AddTail(2);
+     deque->AddTail(1);
+     if( !IsPalindrome(deque) ) result++;
+
+     deque->AddTail(1);
+     deque->AddTail(2);
+     deque->AddTail(3);
+     deque->AddTail(2);
+     deque->AddTail(1);
+     if( !IsPalindrome(deque) ) result++;
+
      delete deque;
      return result;
 }
 //===========================================================================
+*/
